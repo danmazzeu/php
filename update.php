@@ -9,4 +9,16 @@
             return false;
         }
     }
+
+    /*
+        $table = "users";
+        $set = ["name" => "New Name", "email" => "new_email@example.com"];
+        $where = "id = 10";
+
+        if (updateData($table, $set, $where)) {
+            echo "Data updated successfully!";
+        } else {
+            echo "Error updating data.";
+        }
+    */
 ?>

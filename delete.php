@@ -8,4 +8,15 @@
             return false;
         }
     }
+
+    /* USAGE
+        $table = "users";
+        $where = "id = 10";
+
+        if (deleteData($table, $where)) {
+            echo "Data deleted successfully!";
+        } else {
+            echo "Error deleting data.";
+        }
+    */
 ?>

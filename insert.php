@@ -11,4 +11,16 @@
             return false;
         }
     }
+    
+    /* USAGE
+        $table = "users";
+        $columns = ["name", "email", "password"];
+        $values = ["John Doe", "johndoe@example.com", "password123"];
+        
+        if (insertData($table, $columns, $values)) {
+            echo "Data inserted successfully!";
+        } else {
+            echo "Error inserting data.";
+        }
+    */
 ?>
