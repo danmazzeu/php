@@ -22,21 +22,4 @@
     echo json_encode($data);
 
     mysqli_close($connect);
-
-    /*  USAGE
-        $where_clause = "id = 10";
-        $columns = ['id', 'name', 'email'];
-
-        $userData = selectData('users', $columns, $where_clause);
-
-        if ($userData) {
-            foreach ($userData as $user) {
-                echo $user['id'];
-                echo $user['name'];
-                echo $user['email'];
-            }
-        } else {
-            echo "Error fetching data.";
-        }
-    */
 ?>
