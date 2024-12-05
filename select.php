@@ -1,9 +1,11 @@
-<?php 
+<?php
+    require_once('connect.php');
+
     $columns = $_POST['columns'];
     $table = $_POST['table'];
     $where = isset($_POST['where']) ? $_POST['where'] : '';
 
-    $sql = "SELECT " . implode(', ', $columns) . " FROM " . $table;
+    $sql = "SELECT " . $columns . " FROM " . $table;
     if (!empty($where)) {
         $sql .= " WHERE " . $where;
     }
