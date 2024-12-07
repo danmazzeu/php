@@ -1,12 +1,34 @@
 <?php
-    $hostname = "seu_servidor";
-    $username = "seu_usuario";
-    $password = "sua_senha";
-    $database = "seu_banco_de_dados";
+class Connect {
+    private $hostname = "127.0.0.1";
+    private $username = "root";
+    private $password = "";
+    private $database = "miniumbook";
+    private $connect;
 
-    $connect = new mysqli($hostname, $username, $password, $database);
+    public function getConnection() {
+        $this->connect = new mysqli(
+            $this->hostname, 
+            $this->username, 
+            $this->password, 
+            $this->database
+        );
 
-    if ($connect->connect_error) {
-        die("Conexão falhou: " . $connect->connect_error);
+        if ($this->connect->connect_error) {
+            throw new Exception("Falha na conexão: " . $this->connect->connect_error);
+        }
+
+        return $this->connect;
     }
+
+    public function closeConnection() {
+        $this->connect->close();
+    }
+}
+
+/* Usage 
+$newConnect = new Connect();
+$connect = $newConnect->getConnection();
+$newConnect->closeConnection();
+*/
 ?>
