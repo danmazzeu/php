@@ -1,36 +1,30 @@
 <?php
-    class Connect {
-        private $hostname = "127.0.0.1";
-        private $username = "";
-        private $password = "";
-        private $database = "";
-        private $connect;
+    class Connection {
+        private $hostname;
+        private $username;
+        private $password;
+        private $database;
+        private $mysqli;
     
-        public function __construct() {
-            $this->connect = new mysqli(
-                $this->hostname, 
-                $this->username, 
-                $this->password, 
-                $this->database
-            );
+        public function __construct($hostname, $username, $password, $database) {
+            $this->hostname = $hostname;
+            $this->username = $username;
+            $this->password = $password;
+            $this->database = $database;
+            $this->mysqli = new mysqli($hostname, $username, $password, $database);
     
-            if ($this->connect->connect_error) {
-                die("Connection failed: " . $this->connect->connect_error);
+            if ($this->mysqli->connect_error) {
+                die("Connection failed: " . $this->mysqli->connect_error);
             }
         }
-    
-        public function getConnection() {
-            return $this->connect;
-        }
-    
+
         public function closeConnection() {
-            $this->connect->close();
+            $this->mysqli->close();
         }
     }
-    
+
     /* Usage 
-    $db = new Connect();
-    $connect = $db->getConnection();
-    $db->closeConnection();
+        $connect = new Connection("127.0.0.1", "username", "password", "database");
+        $connect->closeConnection();
     */
 ?>
