@@ -3,10 +3,10 @@ class Connect {
     private $hostname = "127.0.0.1";
     private $username = "root";
     private $password = "";
-    private $database = "database";
+    private $database = "miniumbook";
     private $connect;
 
-    public function getConnection() {
+    public function __construct() {
         $this->connect = new mysqli(
             $this->hostname, 
             $this->username, 
@@ -15,9 +15,11 @@ class Connect {
         );
 
         if ($this->connect->connect_error) {
-            throw new Exception("Falha na conexão: " . $this->connect->connect_error);
+            die("Connection failed: " . $this->connect->connect_error);
         }
+    }
 
+    public function getConnection() {
         return $this->connect;
     }
 
@@ -27,8 +29,8 @@ class Connect {
 }
 
 /* Usage 
-$newConnect = new Connect();
-$connect = $newConnect->getConnection();
-$newConnect->closeConnection();
+$db = new Connect();
+$connect = $db->getConnection();
+$db->closeConnection();
 */
 ?>
