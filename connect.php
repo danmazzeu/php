@@ -1,9 +1,9 @@
 <?php
 class Connect {
     private $hostname = "127.0.0.1";
-    private $username = "root";
+    private $username = "";
     private $password = "";
-    private $database = "miniumbook";
+    private $database = "";
     private $connect;
 
     public function __construct() {
