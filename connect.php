@@ -3,7 +3,7 @@ class Connect {
     private $hostname = "127.0.0.1";
     private $username = "root";
     private $password = "";
-    private $database = "miniumbook";
+    private $database = "database";
     private $connect;
 
     public function getConnection() {
