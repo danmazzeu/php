@@ -35,23 +35,36 @@
     
         public function read(array $where = []): array {
             $sql = "SELECT * FROM $this->table";
+        
             if (!empty($where)) {
                 $sql .= " WHERE " . implode(" AND ", array_map(fn($k, $v) => "$k = ?", array_keys($where), $where));
             }
-    
+        
             $stmt = $this->mysqli->prepare($sql);
-    
+        
+            if ($stmt === false) {
+                throw new mysqli_sql_exception("Error preparing statement: " . $this->mysqli->error);
+            }
+        
             if (!empty($where)) {
                 $params = array_values($where);
-                call_user_func_array(array($stmt, 'bind_param'), $params);
+                $types = str_repeat('s', count($params));
+                $stmt->bind_param($types, ...$params);
             }
-    
-            $stmt->execute();
+        
+            if (!$stmt->execute()) {
+                throw new mysqli_sql_exception("Error executing statement: " . $stmt->error);
+            }
+        
             $result = $stmt->get_result();
             $rows = [];
-            
-            while ($row = $result->fetch_assoc()) { $rows[] = $row; }
-    
+        
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        
+            $stmt->close();
+        
             return $rows;
         }
 
@@ -101,7 +114,7 @@
     }
 
 /* Usage
-    require_once('php/global/crud.php'); 
+    require_once('php/global/crud.php');
 
     $crud = new CRUD();
     $crud->hostname = "127.0.0.1";
